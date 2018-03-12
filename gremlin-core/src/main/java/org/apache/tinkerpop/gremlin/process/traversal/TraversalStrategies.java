@@ -23,6 +23,8 @@ import org.apache.tinkerpop.gremlin.process.computer.traversal.strategy.finaliza
 import org.apache.tinkerpop.gremlin.process.computer.traversal.strategy.optimization.GraphFilterStrategy;
 import org.apache.tinkerpop.gremlin.process.computer.traversal.strategy.optimization.MessagePassingReductionStrategy;
 import org.apache.tinkerpop.gremlin.process.traversal.strategy.decoration.ConnectiveStrategy;
+import org.apache.tinkerpop.gremlin.process.traversal.strategy.decoration.RequirementsStrategy;
+import org.apache.tinkerpop.gremlin.process.traversal.strategy.decoration.SubgraphStrategy;
 import org.apache.tinkerpop.gremlin.process.traversal.strategy.finalization.ProfileStrategy;
 import org.apache.tinkerpop.gremlin.process.traversal.strategy.optimization.AdjacentToIncidentStrategy;
 import org.apache.tinkerpop.gremlin.process.traversal.strategy.optimization.FilterRankingStrategy;
@@ -176,7 +178,8 @@ public interface TraversalStrategies extends Serializable, Cloneable {
             }
         }
 
-        logger.error("Sorted strategies: " + sortedStrategies.stream().map(TraversalStrategy::toString).collect(Collectors.toList()));
+        if (sortedStrategies.stream().anyMatch(s -> s instanceof SubgraphStrategy || s instanceof RequirementsStrategy))
+            logger.error("Sorted strategies: " + sortedStrategies.stream().map(TraversalStrategy::toString).collect(Collectors.toList()));
 
         return sortedStrategies;
     }
