@@ -57,6 +57,7 @@ public final class RequirementsStrategy extends AbstractTraversalStrategy<Traver
         RequirementsStrategy strategy = (RequirementsStrategy) traversalStrategies.toList().stream().filter(s -> s instanceof RequirementsStrategy).findAny().orElse(null);
         if (null == strategy) {
             strategy = new RequirementsStrategy();
+            logger.error("Applying requirements: " + strategy.requirements.stream().map(TraverserRequirement::toString).collect(Collectors.toList()));
             traversalStrategies.addStrategies(strategy);
         } else {
             final RequirementsStrategy cloneStrategy = new RequirementsStrategy();
