@@ -20,6 +20,8 @@ package org.apache.tinkerpop.gremlin.process.traversal.strategy.decoration;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.configuration.MapConfiguration;
+import org.apache.tinkerpop.gremlin.process.computer.traversal.strategy.decoration.VertexProgramStrategy;
+import org.apache.tinkerpop.gremlin.process.remote.traversal.strategy.decoration.RemoteStrategy;
 import org.apache.tinkerpop.gremlin.process.traversal.Step;
 import org.apache.tinkerpop.gremlin.process.traversal.Traversal;
 import org.apache.tinkerpop.gremlin.process.traversal.TraversalStrategy;
@@ -53,12 +55,7 @@ import org.apache.tinkerpop.gremlin.structure.PropertyType;
 import org.apache.tinkerpop.gremlin.structure.Vertex;
 import org.apache.tinkerpop.gremlin.structure.VertexProperty;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -78,7 +75,9 @@ public final class SubgraphStrategy extends AbstractTraversalStrategy<TraversalS
     private final Traversal.Admin<Edge, ?> edgeCriterion;
     private final Traversal.Admin<VertexProperty, ?> vertexPropertyCriterion;
 
-    private static final Set<Class<? extends DecorationStrategy>> POSTS = Collections.singleton(ConnectiveStrategy.class);
+    private static final Set<Class<? extends DecorationStrategy>> POSTS = new HashSet<>(Arrays.asList(
+            ConnectiveStrategy.class,
+            RequirementsStrategy.class));
 
     private final String MARKER = Graph.Hidden.hide("gremlin.subgraphStrategy");
 
