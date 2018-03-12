@@ -33,6 +33,7 @@ import org.slf4j.LoggerFactory;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * @author Marko A. Rodriguez (http://markorodriguez.com)
@@ -48,7 +49,6 @@ public final class RequirementsStrategy extends AbstractTraversalStrategy<Traver
 
     @Override
     public void apply(final Traversal.Admin<?, ?> traversal) {
-        logger.error("Applying RequirementsStrrategy.");
         if (traversal.getParent() instanceof EmptyStep && !this.requirements.isEmpty())
             traversal.addStep(new RequirementsStep<>(traversal, this.requirements));
     }
@@ -61,6 +61,7 @@ public final class RequirementsStrategy extends AbstractTraversalStrategy<Traver
         } else {
             final RequirementsStrategy cloneStrategy = new RequirementsStrategy();
             cloneStrategy.requirements.addAll(strategy.requirements);
+            logger.error("Applying requirements: " + cloneStrategy.requirements.stream().map(TraverserRequirement::toString).collect(Collectors.toList()));
             strategy = cloneStrategy;
             traversalStrategies.addStrategies(strategy);
         }

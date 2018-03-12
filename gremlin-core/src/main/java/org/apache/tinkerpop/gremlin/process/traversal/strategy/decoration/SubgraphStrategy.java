@@ -147,12 +147,12 @@ public final class SubgraphStrategy extends AbstractTraversalStrategy<TraversalS
 
     @Override
     public void apply(final Traversal.Admin<?, ?> traversal) {
-        logger.error("Applying SubgraphStrategy.");
         // do not apply subgraph strategy to already created subgraph filter branches (or else you get infinite recursion)
         if (traversal.getStartStep().getLabels().contains(MARKER)) {
             traversal.getStartStep().removeLabel(MARKER);
             return;
         }
+        logger.error("Applying SubgraphStrategy.");
         //
         final List<GraphStep> graphSteps = TraversalHelper.getStepsOfAssignableClass(GraphStep.class, traversal);
         final List<VertexStep> vertexSteps = TraversalHelper.getStepsOfAssignableClass(VertexStep.class, traversal);
