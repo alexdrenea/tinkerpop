@@ -287,7 +287,7 @@ public class SubgraphStrategyProcessTest extends AbstractGremlinProcessTest {
         assertEquals(0, sg.V(convertToVertexId("josh")).in().count().next().longValue());
 
         assertEquals(3, g.V(convertToVertexId("josh")).bothE().count().next().longValue());
-        assertEquals(2, sg.V(convertToVertexId("josh")).bothE().count().next().longValue());
+        assertEquals(2, sg.withPath().V(convertToVertexId("josh")).bothE().count().next().longValue());
         assertEquals(3, g.V(convertToVertexId("josh")).both().count().next().longValue());
 
 final Traversal<Vertex, Long> t = sg.withPath().V(convertToVertexId("josh")).both().count();
@@ -317,7 +317,7 @@ try {
         assertEquals(2, g.V(convertToVertexId("josh")).bothE("created").count().next().longValue());
         assertEquals(2, sg.V(convertToVertexId("josh")).bothE("created").count().next().longValue());
         assertEquals(2, g.V(convertToVertexId("josh")).both("created").count().next().longValue());
-        assertEquals(2, sg.V(convertToVertexId("josh")).both("created").count().next().longValue());
+        assertEquals(2, sg.withPath().V(convertToVertexId("josh")).both("created").count().next().longValue());
 /*
         assertEquals(1, g.V(convertToVertexId("josh")).inE("knows").count().next().longValue());
         assertEquals(0, sg.V(convertToVertexId("josh")).inE("knows").count().next().longValue());

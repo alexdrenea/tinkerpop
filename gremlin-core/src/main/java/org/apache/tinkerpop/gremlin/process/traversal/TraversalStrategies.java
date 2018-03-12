@@ -178,8 +178,8 @@ public interface TraversalStrategies extends Serializable, Cloneable {
             }
         }
 
-        if (sortedStrategies.stream().anyMatch(s -> s instanceof SubgraphStrategy) && sortedStrategies.stream().anyMatch(s -> s instanceof RequirementsStrategy))
-            logger.error("Sorted strategies: " + sortedStrategies.stream().map(TraversalStrategy::toString).collect(Collectors.toList()));
+        //if (sortedStrategies.stream().anyMatch(s -> s instanceof SubgraphStrategy) && sortedStrategies.stream().anyMatch(s -> s instanceof RequirementsStrategy))
+        //    logger.error("Sorted strategies: " + sortedStrategies.stream().map(TraversalStrategy::toString).collect(Collectors.toList()));
 
         return sortedStrategies;
     }

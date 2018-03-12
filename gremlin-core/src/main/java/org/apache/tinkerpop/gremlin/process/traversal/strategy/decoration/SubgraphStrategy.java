@@ -152,7 +152,7 @@ public final class SubgraphStrategy extends AbstractTraversalStrategy<TraversalS
             traversal.getStartStep().removeLabel(MARKER);
             return;
         }
-        logger.error("Applying SubgraphStrategy.");
+        //logger.error("Applying SubgraphStrategy.");
         //
         final List<GraphStep> graphSteps = TraversalHelper.getStepsOfAssignableClass(GraphStep.class, traversal);
         final List<VertexStep> vertexSteps = TraversalHelper.getStepsOfAssignableClass(VertexStep.class, traversal);
