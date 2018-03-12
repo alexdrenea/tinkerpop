@@ -27,6 +27,8 @@ import org.apache.tinkerpop.gremlin.process.traversal.step.util.EmptyStep;
 import org.apache.tinkerpop.gremlin.process.traversal.step.util.RequirementsStep;
 import org.apache.tinkerpop.gremlin.process.traversal.strategy.AbstractTraversalStrategy;
 import org.apache.tinkerpop.gremlin.process.traversal.traverser.TraverserRequirement;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -37,6 +39,8 @@ import java.util.Set;
  */
 public final class RequirementsStrategy extends AbstractTraversalStrategy<TraversalStrategy.DecorationStrategy> implements TraversalStrategy.DecorationStrategy {
 
+    private static final Logger logger = LoggerFactory.getLogger(RequirementsStrategy.class);
+
     private final Set<TraverserRequirement> requirements = new HashSet<>();
 
     private RequirementsStrategy() {
@@ -44,6 +48,7 @@ public final class RequirementsStrategy extends AbstractTraversalStrategy<Traver
 
     @Override
     public void apply(final Traversal.Admin<?, ?> traversal) {
+        logger.error("Applying RequirementsStrrategy.");
         if (traversal.getParent() instanceof EmptyStep && !this.requirements.isEmpty())
             traversal.addStep(new RequirementsStep<>(traversal, this.requirements));
     }

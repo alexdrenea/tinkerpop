@@ -55,6 +55,8 @@ import org.apache.tinkerpop.gremlin.structure.Graph;
 import org.apache.tinkerpop.gremlin.structure.PropertyType;
 import org.apache.tinkerpop.gremlin.structure.Vertex;
 import org.apache.tinkerpop.gremlin.structure.VertexProperty;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -71,6 +73,8 @@ import java.util.stream.Stream;
  */
 public final class SubgraphStrategy extends AbstractTraversalStrategy<TraversalStrategy.DecorationStrategy>
         implements TraversalStrategy.DecorationStrategy {
+
+    private static final Logger logger = LoggerFactory.getLogger(SubgraphStrategy.class);
 
     private final Traversal.Admin<Vertex, ?> vertexCriterion;
     private final Traversal.Admin<Edge, ?> edgeCriterion;
@@ -143,12 +147,12 @@ public final class SubgraphStrategy extends AbstractTraversalStrategy<TraversalS
 
     @Override
     public void apply(final Traversal.Admin<?, ?> traversal) {
+        logger.error("Applying SubgraphStrategy.");
         // do not apply subgraph strategy to already created subgraph filter branches (or else you get infinite recursion)
         if (traversal.getStartStep().getLabels().contains(MARKER)) {
             traversal.getStartStep().removeLabel(MARKER);
             return;
         }
-        RequirementsStrategy.addRequirements(traversal.getStrategies(), TraverserRequirement.PATH);
         //
         final List<GraphStep> graphSteps = TraversalHelper.getStepsOfAssignableClass(GraphStep.class, traversal);
         final List<VertexStep> vertexSteps = TraversalHelper.getStepsOfAssignableClass(VertexStep.class, traversal);
