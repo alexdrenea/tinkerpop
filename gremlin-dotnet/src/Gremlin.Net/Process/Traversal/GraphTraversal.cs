@@ -355,7 +355,7 @@ namespace Gremlin.Net.Process.Traversal
         /// <summary>
         ///     Adds the choose step to this <see cref="GraphTraversal{SType, EType}" />.
         /// </summary>
-        public GraphTraversal<S, E2> Choose<E2> (TraversalPredicate choosePredicate, ITraversal trueChoice)
+        public GraphTraversal<S, E2> Choose<E2> (P choosePredicate, ITraversal trueChoice)
         {
             Bytecode.AddStep("choose", choosePredicate, trueChoice);
             return Wrap<S, E2>(this);
@@ -364,7 +364,7 @@ namespace Gremlin.Net.Process.Traversal
         /// <summary>
         ///     Adds the choose step to this <see cref="GraphTraversal{SType, EType}" />.
         /// </summary>
-        public GraphTraversal<S, E2> Choose<E2> (TraversalPredicate choosePredicate, ITraversal trueChoice, ITraversal falseChoice)
+        public GraphTraversal<S, E2> Choose<E2> (P choosePredicate, ITraversal trueChoice, ITraversal falseChoice)
         {
             Bytecode.AddStep("choose", choosePredicate, trueChoice, falseChoice);
             return Wrap<S, E2>(this);
@@ -496,7 +496,7 @@ namespace Gremlin.Net.Process.Traversal
         /// <summary>
         ///     Adds the emit step to this <see cref="GraphTraversal{SType, EType}" />.
         /// </summary>
-        public GraphTraversal<S, E> Emit (TraversalPredicate emitPredicate)
+        public GraphTraversal<S, E> Emit (P emitPredicate)
         {
             Bytecode.AddStep("emit", emitPredicate);
             return Wrap<S, E>(this);
@@ -514,7 +514,7 @@ namespace Gremlin.Net.Process.Traversal
         /// <summary>
         ///     Adds the filter step to this <see cref="GraphTraversal{SType, EType}" />.
         /// </summary>
-        public GraphTraversal<S, E> Filter (TraversalPredicate predicate)
+        public GraphTraversal<S, E> Filter (P predicate)
         {
             Bytecode.AddStep("filter", predicate);
             return Wrap<S, E>(this);
@@ -658,7 +658,7 @@ namespace Gremlin.Net.Process.Traversal
         /// <summary>
         ///     Adds the has step to this <see cref="GraphTraversal{SType, EType}" />.
         /// </summary>
-        public GraphTraversal<S, E> Has (string propertyKey, TraversalPredicate predicate)
+        public GraphTraversal<S, E> Has (string propertyKey, P predicate)
         {
             Bytecode.AddStep("has", propertyKey, predicate);
             return Wrap<S, E>(this);
@@ -676,7 +676,7 @@ namespace Gremlin.Net.Process.Traversal
         /// <summary>
         ///     Adds the has step to this <see cref="GraphTraversal{SType, EType}" />.
         /// </summary>
-        public GraphTraversal<S, E> Has (string label, string propertyKey, TraversalPredicate predicate)
+        public GraphTraversal<S, E> Has (string label, string propertyKey, P predicate)
         {
             Bytecode.AddStep("has", label, propertyKey, predicate);
             return Wrap<S, E>(this);
@@ -703,7 +703,7 @@ namespace Gremlin.Net.Process.Traversal
         /// <summary>
         ///     Adds the has step to this <see cref="GraphTraversal{SType, EType}" />.
         /// </summary>
-        public GraphTraversal<S, E> Has (T accessor, TraversalPredicate predicate)
+        public GraphTraversal<S, E> Has (T accessor, P predicate)
         {
             Bytecode.AddStep("has", accessor, predicate);
             return Wrap<S, E>(this);
@@ -732,7 +732,7 @@ namespace Gremlin.Net.Process.Traversal
         /// <summary>
         ///     Adds the hasId step to this <see cref="GraphTraversal{SType, EType}" />.
         /// </summary>
-        public GraphTraversal<S, E> HasId (TraversalPredicate predicate)
+        public GraphTraversal<S, E> HasId (P predicate)
         {
             Bytecode.AddStep("hasId", predicate);
             return Wrap<S, E>(this);
@@ -741,7 +741,7 @@ namespace Gremlin.Net.Process.Traversal
         /// <summary>
         ///     Adds the hasKey step to this <see cref="GraphTraversal{SType, EType}" />.
         /// </summary>
-        public GraphTraversal<S, E> HasKey (TraversalPredicate predicate)
+        public GraphTraversal<S, E> HasKey (P predicate)
         {
             Bytecode.AddStep("hasKey", predicate);
             return Wrap<S, E>(this);
@@ -761,7 +761,7 @@ namespace Gremlin.Net.Process.Traversal
         /// <summary>
         ///     Adds the hasLabel step to this <see cref="GraphTraversal{SType, EType}" />.
         /// </summary>
-        public GraphTraversal<S, E> HasLabel (TraversalPredicate predicate)
+        public GraphTraversal<S, E> HasLabel (P predicate)
         {
             Bytecode.AddStep("hasLabel", predicate);
             return Wrap<S, E>(this);
@@ -801,7 +801,7 @@ namespace Gremlin.Net.Process.Traversal
         /// <summary>
         ///     Adds the hasValue step to this <see cref="GraphTraversal{SType, EType}" />.
         /// </summary>
-        public GraphTraversal<S, E> HasValue (TraversalPredicate predicate)
+        public GraphTraversal<S, E> HasValue (P predicate)
         {
             Bytecode.AddStep("hasValue", predicate);
             return Wrap<S, E>(this);
@@ -879,7 +879,7 @@ namespace Gremlin.Net.Process.Traversal
         /// <summary>
         ///     Adds the is step to this <see cref="GraphTraversal{SType, EType}" />.
         /// </summary>
-        public GraphTraversal<S, E> Is (TraversalPredicate predicate)
+        public GraphTraversal<S, E> Is (P predicate)
         {
             Bytecode.AddStep("is", predicate);
             return Wrap<S, E>(this);
@@ -1591,7 +1591,7 @@ namespace Gremlin.Net.Process.Traversal
         /// <summary>
         ///     Adds the until step to this <see cref="GraphTraversal{SType, EType}" />.
         /// </summary>
-        public GraphTraversal<S, E> Until (TraversalPredicate untilPredicate)
+        public GraphTraversal<S, E> Until (P untilPredicate)
         {
             Bytecode.AddStep("until", untilPredicate);
             return Wrap<S, E>(this);
@@ -1651,7 +1651,7 @@ namespace Gremlin.Net.Process.Traversal
         /// <summary>
         ///     Adds the where step to this <see cref="GraphTraversal{SType, EType}" />.
         /// </summary>
-        public GraphTraversal<S, E> Where (TraversalPredicate predicate)
+        public GraphTraversal<S, E> Where (P predicate)
         {
             Bytecode.AddStep("where", predicate);
             return Wrap<S, E>(this);
@@ -1660,7 +1660,7 @@ namespace Gremlin.Net.Process.Traversal
         /// <summary>
         ///     Adds the where step to this <see cref="GraphTraversal{SType, EType}" />.
         /// </summary>
-        public GraphTraversal<S, E> Where (string startKey, TraversalPredicate predicate)
+        public GraphTraversal<S, E> Where (string startKey, P predicate)
         {
             Bytecode.AddStep("where", startKey, predicate);
             return Wrap<S, E>(this);
