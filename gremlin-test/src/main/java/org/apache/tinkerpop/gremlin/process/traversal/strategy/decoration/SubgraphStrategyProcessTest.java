@@ -297,7 +297,7 @@ try {
   throw new IllegalStateException(t.toString(), ex);
 }
 */
-final Traversal<Vertex, Vertex> t = sg.V(convertToVertexId("josh")).both();
+final Traversal<Vertex, Vertex> t = sg.withPath().V(convertToVertexId("josh")).both();
 try {
         assertEquals(2, t.toList().size());
 } catch (IllegalStateException ex) {
