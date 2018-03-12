@@ -41,6 +41,8 @@ import org.apache.tinkerpop.gremlin.process.traversal.util.DefaultTraversalStrat
 import org.apache.tinkerpop.gremlin.structure.Graph;
 import org.apache.tinkerpop.gremlin.structure.util.empty.EmptyGraph;
 import org.apache.tinkerpop.gremlin.util.tools.MultiMap;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -62,6 +64,8 @@ import java.util.stream.Collectors;
  * @author Matthias Broecheler (me@matthiasb.com)
  */
 public interface TraversalStrategies extends Serializable, Cloneable {
+
+    private static final Logger logger = LoggerFactory.getLogger(TraversalStrategies.class);
 
     static List<Class<? extends TraversalStrategy>> STRATEGY_CATEGORIES = Collections.unmodifiableList(Arrays.asList(TraversalStrategy.DecorationStrategy.class, TraversalStrategy.OptimizationStrategy.class, TraversalStrategy.ProviderOptimizationStrategy.class, TraversalStrategy.FinalizationStrategy.class, TraversalStrategy.VerificationStrategy.class));
 
@@ -172,6 +176,7 @@ public interface TraversalStrategies extends Serializable, Cloneable {
             }
         }
 
+        logger.error("Sorted strategies: " + sortedStrategies.stream().map(TraversalStrategy::toString).collect(Collectors.toList()));
 
         return sortedStrategies;
     }
