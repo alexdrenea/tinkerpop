@@ -148,6 +148,7 @@ public final class SubgraphStrategy extends AbstractTraversalStrategy<TraversalS
             traversal.getStartStep().removeLabel(MARKER);
             return;
         }
+        RequirementsStrategy.addRequirements(traversal.getStrategies(), TraverserRequirement.PATH);
         //
         final List<GraphStep> graphSteps = TraversalHelper.getStepsOfAssignableClass(GraphStep.class, traversal);
         final List<VertexStep> vertexSteps = TraversalHelper.getStepsOfAssignableClass(VertexStep.class, traversal);
@@ -264,10 +265,6 @@ public final class SubgraphStrategy extends AbstractTraversalStrategy<TraversalS
                     }
                 }
             }
-        }
-        if (!traversal.getTraverserRequirements().contains(TraverserRequirement.PATH) &&
-                TraversalHelper.hasStepOfAssignableClassRecursively(EdgeOtherVertexStep.class, traversal)) {
-            RequirementsStrategy.addRequirements(traversal.getStrategies(), TraverserRequirement.PATH);
         }
     }
 
