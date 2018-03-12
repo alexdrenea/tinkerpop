@@ -297,7 +297,7 @@ try {
   throw new IllegalStateException(t.toString(), ex);
 }
 */
-final Traversal<Vertex, Vertex> t = sg.withPath().V(convertToVertexId("josh")).union(outE().inV(), inE().outV());
+final Traversal<Vertex, Vertex> t = sg.withPath().V(convertToVertexId("josh")).union(__.outE().inV(), __.inE().outV());
 try {
         assertEquals(2, t.toList().size());
 } catch (Exception ex) {
