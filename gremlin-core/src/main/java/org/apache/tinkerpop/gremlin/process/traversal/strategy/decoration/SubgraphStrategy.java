@@ -266,7 +266,7 @@ public final class SubgraphStrategy extends AbstractTraversalStrategy<TraversalS
             }
         }
         if (!traversal.getTraverserRequirements().contains(TraverserRequirement.PATH) &&
-                TraversalHelper.hasStepOfAssignableClassRecursively(EdgeOtherVertexStep.class)) {
+                TraversalHelper.hasStepOfAssignableClassRecursively(EdgeOtherVertexStep.class, traversal)) {
             RequirementsStrategy.addRequirements(traversal.getStrategies(), TraverserRequirement.PATH);
         }
     }
